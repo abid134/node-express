@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: node-express
+  template:
+    metadata:
+      labels:
+        app: node-express
+    spec:
+      containers:
+        - name: node-express
+          image: us.icr.io/hello-world002/node-express:latest
+          resources:
+            limits:
+              memory: "200Mi"
+              cpu: "250m"
+            requests:
+              memory: "100Mi"
+              cpu: "125m"
+          ports:
+            - containerPort: 3000
